@@ -1,0 +1,41 @@
+[project]
+name = "revodata-assignment"
+version = "1.0"
+description = "DAB on dev"
+authors = [{name = "Yogesh Deshpande", email = "yldeshpande@gmail.com"}]
+requires-python = ">=3.12,<3.13"
+readme = "README.md"
+classifiers = [
+    "External job purpose"
+]
+
+dependencies = [
+    "pyjwt==2.10.0"
+]
+
+[dependency-group]
+dev = [
+    "pip",
+    "pytest==7.4.2",
+    "chispa>0.9.3,<0.10",
+    "databricks-sdk>=0.39.0,<0.40",
+    "databricks-dlt>=0.2.0,<0.3",
+    "azure-mgmt-databricks>=2.0.0,<3",
+    "ipython>=0.10.2,<9",
+    "toml>=0.10.2,<0.11",
+    "setuptools>=80.0.1,<81",
+    "findspark==2.0.1",
+    "azure-core>=1.38.0",
+    "delta-spark==3.1.0",
+    "pyspark==3.5.0",
+    "databricks-cli==0.25.0"
+]
+
+dab = [
+    "databricks-bundles>=0.248.0,<0.249",
+    "gitpython>=3.1.44,<4"
+]
+
+[[tool.uv.index]]
+name = "pypi"
+url  = "https://pypi.org/simple"

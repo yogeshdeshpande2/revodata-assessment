@@ -1,0 +1,61 @@
+# This pipeline is not tested as it needs parallelism for which the form is submitted but as it states on the form which can take several days.
+# Hence it is not feasible to setup the deployment pipeline at this stage considering the time constraints
+
+# develop branch is for Develop/Test environment
+# acceptance branch is for Acceptance environment
+# master is for Production
+
+trigger:
+  branches:
+    include:
+      - develop
+      - acceptance
+      - master
+      - feature/*
+
+variables:
+  - name: environment
+    value: $(Build.SourceBranchName)
+
+stages:
+  - stage: CI
+    condition: in(variable['Build.Reason'], 'PullRequest', 'Manual', 'IndividualCI')
+    jobs:
+      - job: Build
+        pool:
+          vmImage: 'ubuntu-latest'
+        steps:
+          - task: UsePythonVersion@0
+            inputs:
+              versionSpec: '3.x'
+          - script: pip install databricks-cli==0.292.0
+            displayName: 'Install Databricks CLI'
+          - script: databricks bundle build -t $(environment)
+            displayName: 'Build Databricks Asset Bundle'
+          - script: pip install -r requirements.txt
+            displayName: 'Install Python Packages from requirements.txt'
+          - script: pytest unittests/
+            displayName: 'Run Unit Tests'
+  - stage: Deploy
+    jobs:
+      - job: DeployDatabricksBundle
+        pool:
+          vmImage: 'ubuntu-latest'
+        steps:
+          - task: UsePythonVersion@0
+            inputs:
+              versionSpec: '3.x'
+          - script: pip install databricks-cli==0.292.0
+            displayName: 'Install Databricks CLI'
+          - task: AzureKeyVault@2
+            inputs:
+              azureSubscription: 'service-connection-cdo'
+              KeyVaultName: 'kv-cdo-100'
+              SecretsFilter: 'DATABRICKS-TOKEN,DATABRICKS-HOST'
+          - script: |
+              echo "[DEFAULT]" > ~/.databrickscfg
+              echo "host = $(DATABRICKS-HOST)" >> ~/.databrickscfg
+              echo "auth_type = databricks-cli" >> ~/.databrickscfg
+              echo "token = $(DATABRICKS-TOKEN)" >> ~/.databrickscfg
+              databricks bundle deploy --profile DEFAULT -t $(environment)
+            displayName: 'Deploy Databricks Asset Bundle'

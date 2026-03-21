@@ -1,0 +1,14 @@
+resources:
+  jobs:
+    ingestion_job:
+      name: "1_ingestion_raw_job"
+      tasks:
+        - task_key: ingestion_raw_task
+          description: "Task to run the ingestion notebook"
+          notebook_task:
+            notebook_path: "${workspace.file_path}/bundle/notebooks/ingest_raw"
+            base_parameters:
+              environment: "${var.environment}"
+              bundle_root_path: "${workspace.file_path}/bundle"
+          existing_cluster_id: ${databricks_cluster.revo_cluster.id}
+          timeout_seconds: 1800                    

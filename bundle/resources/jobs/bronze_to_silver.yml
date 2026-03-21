@@ -1,0 +1,14 @@
+resources:
+  jobs:
+    bronze_to_silver_job:
+      name: "2_bronze_to_silver_job"
+      tasks:
+        - task_key: bronze_to_silver_task
+          description: "Task to run the bronze_to_silver notebook"
+          notebook_task:
+            notebook_path: "${workspace.file_path}/bundle/notebooks/bronze_to_silver"
+            base_parameters:
+              environment: "${var.environment}"
+              bundle_root_path: "${workspace.file_path}/bundle"
+          existing_cluster_id: ${databricks_cluster.revo_cluster.id}
+          timeout_seconds: 1800                    

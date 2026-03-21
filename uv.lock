@@ -1,0 +1,23 @@
+version = 1
+revision = 3
+requires-python = "==3.12.*"
+
+[[package]]
+name = "pyjwt"
+version = "2.10.0"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/b5/05/324952ded002de746f87b21066b9373080bb5058f64cf01c4d62784b8186/pyjwt-2.10.0.tar.gz", hash = "sha256:7628a7eb7938959ac1b26e819a1df0fd3259505627b575e4bad6d08f76db695c", size = 87687, upload-time = "2024-11-17T10:19:49.26Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/6f/1d/ef9b066e7ef60494c94173dc9f0b9adf5d9ec5f888109f5c669f53d4144b/PyJWT-2.10.0-py3-none-any.whl", hash = "sha256:543b77207db656de204372350926bed5a86201c4cbff159f623f79c7bb487a15", size = 23002, upload-time = "2024-11-17T10:19:46.81Z" },
+]
+
+[[package]]
+name = "revodata-assignment"
+version = "1.0"
+source = { virtual = "." }
+dependencies = [
+    { name = "pyjwt" },
+]
+
+[package.metadata]
+requires-dist = [{ name = "pyjwt", specifier = "==2.10.0" }]
