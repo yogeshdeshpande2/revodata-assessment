@@ -1,9 +1,9 @@
 from pyspark.sql import functions as psf
 from pyspark.sql.window import Window
 
-from utils import Utilities
-from utils.config_loader import load_config
-from utils.databricks_logger import DatabricksLogger
+from bundle.utils import Utilities
+from bundle.utils.config_loader import load_config
+from bundle.utils.databricks_logger import DatabricksLogger
 
 class SilverToGold:
 	def __init__(self, bundle_root_path, dbutils, config_path, env="t"):
@@ -76,7 +76,7 @@ class SilverToGold:
 		window_spec = Window.orderBy(df_gold_airbnb.est_annual_airbnb_revenue.desc())
 		df_gold_airbnb = df_gold_airbnb.withColumn("airbnb_revenue_rank", psf.rank().over(window_spec))
 		df_gold_airbnb = df_gold_airbnb.withColumn("occupancy_rate", psf.lit(self.occupancy_rate))
-		df_gold_airbnb.write.mode("append").saveAsTable(self.gold_top_zipcodes_airbnb_table_name)
+		df_gold_airbnb.write.mode("overwrite").saveAsTable(self.gold_top_zipcodes_airbnb_table_name)
 		self.DatabricksLogger.info(
 			f"Gold table '{self.gold_top_zipcodes_airbnb_table_name}' created",
 			row_count=df_gold_airbnb.count(),
@@ -98,7 +98,7 @@ class SilverToGold:
 		)
 		window_spec = Window.orderBy(df_gold_rentals.est_annual_rental_revenue.desc())
 		df_gold_rentals = df_gold_rentals.withColumn("rental_revenue_rank", psf.rank().over(window_spec))
-		df_gold_rentals.write.mode("append").saveAsTable(self.gold_top_zipcodes_rentals_table_name)
+		df_gold_rentals.write.mode("overwrite").saveAsTable(self.gold_top_zipcodes_rentals_table_name)
 		self.DatabricksLogger.info(
 			f"Gold table '{self.gold_top_zipcodes_rentals_table_name}' created",
 			row_count=df_gold_rentals.count(),

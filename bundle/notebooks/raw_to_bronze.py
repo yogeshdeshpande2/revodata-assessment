@@ -12,6 +12,7 @@
 import requests
 import json
 import sys
+import os
 from pathlib import Path
 
 
@@ -35,9 +36,9 @@ except NameError:
 # COMMAND ----------
 
 bundle_root_path = dbutils.widgets.get("bundle_root_path")
-sys.path.append(bundle_root_path)
+sys.path.append(os.path.dirname(bundle_root_path))
 
-from src.raw_to_bronze import RawToBronze
+from bundle.src.raw_bronze import RawToBronze
 
 config_path = f"{bundle_root_path}/configs/env_config.yaml"
 transformer = RawToBronze(bundle_root_path, dbutils, config_path)

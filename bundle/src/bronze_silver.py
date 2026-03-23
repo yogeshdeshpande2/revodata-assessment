@@ -1,9 +1,9 @@
 from pyspark.sql import functions as psf
 from pyspark.sql.types import ArrayType
 
-from utils import Utilities
-from utils.config_loader import load_config
-from utils.databricks_logger import DatabricksLogger
+from bundle.utils import Utilities
+from bundle.utils.config_loader import load_config
+from bundle.utils.databricks_logger import DatabricksLogger
 
 class BronzeToSilver:
     def __init__(self, bundle_root_path, dbutils, config_path, env="t"):
@@ -101,7 +101,7 @@ class BronzeToSilver:
         df_bronze_airbnb_coords.createOrReplaceTempView("points")
         df_bronze_postcode_flat.createOrReplaceTempView("postcodes")
 
-        result = spark.sql("""
+        result = self.spark.sql("""
         SELECT p.*, pc.postcode
         FROM points p, postcodes pc
         WHERE ST_Contains(pc.polygon, p.point)

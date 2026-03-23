@@ -12,6 +12,7 @@ from pyspark.sql.window import Window
 
 import sys
 from pathlib import Path
+import os
 
 # COMMAND ----------
 
@@ -32,9 +33,9 @@ except NameError:
 # COMMAND ----------
 
 bundle_root_path = dbutils.widgets.get("bundle_root_path")
-sys.path.append(bundle_root_path)
+sys.path.append(os.path.dirname(bundle_root_path))
 
-from src.silver_to_gold import SilverToGold
+from bundle.src.silver_gold import SilverToGold
 
 config_path = f"{bundle_root_path}/configs/env_config.yaml"
 

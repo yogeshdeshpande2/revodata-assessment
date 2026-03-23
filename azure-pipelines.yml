@@ -34,7 +34,7 @@ stages:
             displayName: 'Build Databricks Asset Bundle'
           - script: pip install -r requirements.txt
             displayName: 'Install Python Packages from requirements.txt'
-          - script: pytest unittests/
+          - script: pytest tests/
             displayName: 'Run Unit Tests'
   - stage: Deploy
     jobs:

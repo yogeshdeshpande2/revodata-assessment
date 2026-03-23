@@ -15,6 +15,7 @@ from pyspark.sql import functions as psf
 from pyspark.sql.types import ArrayType
 
 import sys
+import os
 from pathlib import Path
 
 # COMMAND ----------
@@ -36,9 +37,9 @@ except NameError:
 # COMMAND ----------
 
 bundle_root_path = dbutils.widgets.get("bundle_root_path")
-sys.path.append(bundle_root_path)
+sys.path.append(os.path.dirname(bundle_root_path))
 
-from src.bronze_to_silver import BronzeToSilver
+from bundle.src.bronze_silver import BronzeToSilver
 
 config_path = f"{bundle_root_path}/configs/env_config.yaml"
 transformer = BronzeToSilver(bundle_root_path, dbutils, config_path)

@@ -1,7 +1,7 @@
 
-from utils import Utilities
-from utils.config_loader import load_config
-from utils.databricks_logger import DatabricksLogger
+from bundle.utils import Utilities
+from bundle.utils.config_loader import load_config
+from bundle.utils.databricks_logger import DatabricksLogger
 
 class RawToBronze:
 	def __init__(self, bundle_root_path, dbutils, config_path, env="t"):

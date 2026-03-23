@@ -29,7 +29,8 @@ dev = [
     "delta-spark==3.1.0",
     "pyspark==3.5.0",
     "databricks-cli==0.25.0",
-    "apache-sedona==1.4.1"
+    "apache-sedona==1.4.1",
+    "pyyml==6.0.3"
 ]
 
 dab = [
