@@ -7,64 +7,72 @@ variables:
     gold_schema_name: db_revodata_gold
     raw_airbnb_adls_path: abfss://con-raw@sarevodata.dfs.core.windows.net/airbnb
     raw_rentals_adls_path: abfss://con-raw@sarevodata.dfs.core.windows.net/rentals
+    raw_postcode_adls_path: abfss://con-raw@sarevodata.dfs.core.windows.net/postcode
     airbnb_file_name: airbnb.csv
     rentals_file_name: rentals.json
+    postcode_file_name: post_codes.geojson
     bronze_adls_path: abfss://con-bronze@sarevodata.dfs.core.windows.net/
     silver_adls_path: abfss://con-silver@sarevodata.dfs.core.windows.net/
     gold_adls_path: abfss://con-gold@sarevodata.dfs.core.windows.net/
     bronze_airbnb_table: bronze_airbnb
     bronze_rentals_table: bronze_rentals
+    bronze_postcode_table: bronze_postcode
     silver_airbnb_table: silver_airbnb
     silver_rentals_table: silver_rentals
-    gold_fact_table: gold_fact_show_data
-    gold_episodes_per_season: gold_episodes_per_season
-    gold_avg_runtime_per_show: gold_avg_runtime_per_show
-    gold_top_cast: gold_top_cast
-    gold_most_common_genres: gold_most_common_genres
-    shows_url: "http://api.tvmaze.com/shows"
-    limit_shows: 100
-    skew_handle_salt_count: 10
+    gold_top_zipcodes_airbnb: gold_top_zipcodes_airbnb
+    gold_top_zipcodes_rentals: gold_top_zipcodes_rentals
+    gold_investment_comparison:  investment_comparison
+    occupancy_rate: 0.50  # Assumed Airbnb occupancy rate (50%)
+    days_per_year: 365
+    months_per_year: 12
+  
   a:
-    catalog_name: cdo_iu_a
-    bronze_schema_name: db_bronze
-    silver_schema_name: db_silver
-    gold_schema_name: db_gold
-    raw_adls_path: abfss://raw@storageacccdoa.dfs.core.windows.net/
-    bronze_adls_path: abfss://bronze@storageacccdoa.dfs.core.windows.net/
-    silver_adls_path: abfss://silver@storageacccdoa.dfs.core.windows.net/
-    gold_adls_path: abfss://gold@storageacccdoa.dfs.core.windows.net/
+    catalog_name: catalog_revodata
+    bronze_schema_name: db_revodata_bronze
+    silver_schema_name: db_revodata_silver
+    gold_schema_name: db_revodata_gold
+    raw_airbnb_adls_path: abfss://con-raw@sarevodata.dfs.core.windows.net/airbnb
+    raw_rentals_adls_path: abfss://con-raw@sarevodata.dfs.core.windows.net/rentals
+    raw_postcode_adls_path: abfss://con-raw@sarevodata.dfs.core.windows.net/postcode
+    airbnb_file_name: airbnb.csv
+    rentals_file_name: rentals.json
+    postcode_file_name: post_codes.geojson
+    bronze_adls_path: abfss://con-bronze@sarevodata.dfs.core.windows.net/
+    silver_adls_path: abfss://con-silver@sarevodata.dfs.core.windows.net/
+    gold_adls_path: abfss://con-gold@sarevodata.dfs.core.windows.net/
     bronze_airbnb_table: bronze_airbnb
     bronze_rentals_table: bronze_rentals
+    bronze_postcode_table: bronze_postcode
     silver_airbnb_table: silver_airbnb
     silver_rentals_table: silver_rentals
-    gold_fact_table: gold_fact_show_data
-    gold_episodes_per_season: gold_episodes_per_season
-    gold_avg_runtime_per_show: gold_avg_runtime_per_show
-    gold_top_cast: gold_top_cast
-    gold_most_common_genres: gold_most_common_genres
-    shows_url: "http://api.tvmaze.com/shows"
-    limit_shows: 100
-    skew_handle_salt_count: 10
+    gold_top_zipcodes_airbnb: gold_top_zipcodes_airbnb
+    gold_top_zipcodes_rentals: gold_top_zipcodes_rentals
+    gold_investment_comparison:  investment_comparison
+    occupancy_rate: 0.50  # Assumed Airbnb occupancy rate (50%)
+    days_per_year: 365
+    months_per_year: 12
   p:
-    catalog_name: cdo_iu_p
-    bronze_schema_name: db_bronze
-    silver_schema_name: db_silver
-    gold_schema_name: db_gold
-    raw_adls_path: abfss://raw@storageacccdop.dfs.core.windows.net/
-    bronze_adls_path: abfss://bronze@storageacccdop.dfs.core.windows.net/
-    silver_adls_path: abfss://silver@storageacccdop.dfs.core.windows.net/
-    gold_adls_path: abfss://gold@storageacccdop.dfs.core.windows.net/
-    bronze_shows_table: bronze_shows
-    bronze_episodes_table: bronze_episodes
-    bronze_cast_table: bronze_cast
-    silver_shows_table: silver_shows
-    silver_episodes_table: silver_episodes
-    silver_cast_table: silver_cast
-    gold_fact_table: gold_fact_show_data
-    gold_episodes_per_season: gold_episodes_per_season
-    gold_avg_runtime_per_show: gold_avg_runtime_per_show
-    gold_top_cast: gold_top_cast
-    gold_most_common_genres: gold_most_common_genres
-    shows_url: "http://api.tvmaze.com/shows"
-    limit_shows: 100
-    skew_handle_salt_count: 10
+    catalog_name: catalog_revodata
+    bronze_schema_name: db_revodata_bronze
+    silver_schema_name: db_revodata_silver
+    gold_schema_name: db_revodata_gold
+    raw_airbnb_adls_path: abfss://con-raw@sarevodata.dfs.core.windows.net/airbnb
+    raw_rentals_adls_path: abfss://con-raw@sarevodata.dfs.core.windows.net/rentals
+    raw_postcode_adls_path: abfss://con-raw@sarevodata.dfs.core.windows.net/postcode
+    airbnb_file_name: airbnb.csv
+    rentals_file_name: rentals.json
+    postcode_file_name: post_codes.geojson
+    bronze_adls_path: abfss://con-bronze@sarevodata.dfs.core.windows.net/
+    silver_adls_path: abfss://con-silver@sarevodata.dfs.core.windows.net/
+    gold_adls_path: abfss://con-gold@sarevodata.dfs.core.windows.net/
+    bronze_airbnb_table: bronze_airbnb
+    bronze_rentals_table: bronze_rentals
+    bronze_postcode_table: bronze_postcode
+    silver_airbnb_table: silver_airbnb
+    silver_rentals_table: silver_rentals
+    gold_top_zipcodes_airbnb: gold_top_zipcodes_airbnb
+    gold_top_zipcodes_rentals: gold_top_zipcodes_rentals
+    gold_investment_comparison:  investment_comparison
+    occupancy_rate: 0.50  # Assumed Airbnb occupancy rate (50%)
+    days_per_year: 365
+    months_per_year: 12

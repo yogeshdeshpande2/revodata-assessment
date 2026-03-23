@@ -10,5 +10,5 @@ resources:
             base_parameters:
               environment: "${var.environment}"
               bundle_root_path: "${workspace.file_path}/bundle"
-          existing_cluster_id: ${databricks_cluster.revo_cluster.id}
+          existing_cluster_id:  ${databricks_cluster.revo_cluster.id}
           timeout_seconds: 1800                    

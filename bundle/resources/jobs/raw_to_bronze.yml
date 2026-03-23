@@ -2,16 +2,6 @@ resources:
   jobs:
     raw_to_bronze_job:
       name: "1_raw_to_bronze_job"
-      job_clusters:
-        - job_cluster_key: "revo_job_cluster"
-          new_cluster:
-            spark_version: "17.3.x-scala2.13"
-            node_type_id: "Standard_DS3_v2"
-            autotermination_minutes: 10
-            autoscale:
-              min_workers: 1
-              max_workers: 1
-            data_security_mode: "SINGLE_USER"
       tasks:
         - task_key: raw_to_bronze_task
           description: "Task to run the raw_to_bronze notebook"
@@ -20,5 +10,5 @@ resources:
             base_parameters:
               environment: "${var.environment}"
               bundle_root_path: "${workspace.file_path}/bundle"
-          job_cluster_key: "revo_job_cluster"
-          timeout_seconds: 1800
+          existing_cluster_id: ${databricks_cluster.revo_cluster.id}
+          timeout_seconds: 1800                    
