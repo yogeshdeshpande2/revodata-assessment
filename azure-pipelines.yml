@@ -19,7 +19,7 @@ variables:
 
 stages:
   - stage: CI
-    condition: in(variable['Build.Reason'], 'PullRequest', 'Manual', 'IndividualCI')
+    condition: or(eq(variables['Build.Reason'], 'PullRequest'), eq(variables['Build.Reason'], 'Manual'), eq(variables['Build.Reason'], 'IndividualCI'))
     jobs:
       - job: Build
         pool:
@@ -28,8 +28,24 @@ stages:
           - task: UsePythonVersion@0
             inputs:
               versionSpec: '3.x'
-          - script: pip install databricks-cli==0.292.0
-            displayName: 'Install Databricks CLI'
+
+
+          # ✅ Remove old CLI if preinstalled
+          - script: |
+              pip uninstall -y databricks-cli || true
+            displayName: Remove old Databricks CLI
+
+          # ✅ Install NEW Databricks CLI (CORRECT WAY)
+          - script: |
+              curl -fsSL https://raw.githubusercontent.com/databricks/setup-cli/main/install.sh | bash
+
+              # Add to PATH explicitly
+              export PATH=$HOME/.databricks/bin:$PATH
+
+              # Verify version
+              databricks version
+            displayName: Install New Databricks CLI
+
           - script: databricks bundle build -t $(environment)
             displayName: 'Build Databricks Asset Bundle'
           - script: pip install -r requirements.txt
@@ -47,11 +63,6 @@ stages:
               versionSpec: '3.x'
           - script: pip install databricks-cli==0.292.0
             displayName: 'Install Databricks CLI'
-          - task: AzureKeyVault@2
-            inputs:
-              azureSubscription: 'service-connection-cdo'
-              KeyVaultName: 'kv-cdo-100'
-              SecretsFilter: 'DATABRICKS-TOKEN,DATABRICKS-HOST'
           - script: |
               echo "[DEFAULT]" > ~/.databrickscfg
               echo "host = $(DATABRICKS-HOST)" >> ~/.databrickscfg
