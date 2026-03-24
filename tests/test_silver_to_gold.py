@@ -1,13 +1,13 @@
 import pytest
 from pyspark.sql import SparkSession
-
 from bundle.src.silver_gold import SilverToGold
+import yaml
+
 
 @pytest.fixture(scope="module")
 def spark():
     return SparkSession.builder.master("local[1]").appName("pytest").getOrCreate()
 
-import yaml
 
 def test_silver_to_gold_init(spark, tmp_path):
     config = {
@@ -23,7 +23,7 @@ def test_silver_to_gold_init(spark, tmp_path):
                 "gold_investment_comparison": "gold_investment",
                 "occupancy_rate": 0.7,
                 "days_per_year": 365,
-                "months_per_year": 12
+                "months_per_year": 12,
             }
         }
     }

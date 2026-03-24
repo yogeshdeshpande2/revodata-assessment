@@ -1,0 +1,29 @@
+.PHONY: install
+install:
+	@echo "Creating virtual environment using UV"
+	@uv sync --all-groups
+
+.PHONY: hook
+hook:
+	@echo "Installing pre-commit hooks"
+	@puv run pre-commit install
+
+.PHONY: requirements
+requirements:
+	@echo "Generating requirements.txt from pyproject.toml"
+	@uv export -r > py_requirements.txt
+
+.PHONY: test
+test:
+	@echo "Running tests with pytest"
+	@export PYTHONPATH=$(pwd) && pytest tests/
+
+.PHONY: build
+build:
+	@echo "Building Databricks asset bundle"
+	@uv build
+
+.PHONY: check-code
+check-code:
+	@echo "Running pre-commit hooks for code quality checks"
+	@uv run pre-commit run -a

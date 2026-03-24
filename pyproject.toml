@@ -10,7 +10,7 @@ classifiers = [
 ]
 
 dependencies = [
-    "pyjwt==2.10.0"
+    # "pyjwt==2.10.0"  # Removed, not used in codebase
 ]
 
 [dependency-group]
@@ -41,3 +41,6 @@ dab = [
 [[tool.uv.index]]
 name = "pypi"
 url  = "https://pypi.org/simple"
+
+[tool.ruff]
+ignore = ["F401"]

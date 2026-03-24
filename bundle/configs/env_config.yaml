@@ -1,4 +1,4 @@
-env: t  # t=test, a=acceptance, p=prod
+env: t  # t=Test, a=Acceptance, p=Production
 variables:
   t:
     catalog_name: catalog_revodata
@@ -21,7 +21,7 @@ variables:
     silver_rentals_table: silver_rentals
     gold_top_zipcodes_airbnb: gold_top_zipcodes_airbnb
     gold_top_zipcodes_rentals: gold_top_zipcodes_rentals
-    gold_investment_comparison:  investment_comparison
+    gold_investment_comparison:  gold_investment_comparison
     occupancy_rate: 0.50  # Assumed Airbnb occupancy rate (50%)
     days_per_year: 365
     months_per_year: 12
@@ -47,7 +47,7 @@ variables:
     silver_rentals_table: silver_rentals
     gold_top_zipcodes_airbnb: gold_top_zipcodes_airbnb
     gold_top_zipcodes_rentals: gold_top_zipcodes_rentals
-    gold_investment_comparison:  investment_comparison
+    gold_investment_comparison:  gold_investment_comparison
     occupancy_rate: 0.50  # Assumed Airbnb occupancy rate (50%)
     days_per_year: 365
     months_per_year: 12
@@ -72,7 +72,7 @@ variables:
     silver_rentals_table: silver_rentals
     gold_top_zipcodes_airbnb: gold_top_zipcodes_airbnb
     gold_top_zipcodes_rentals: gold_top_zipcodes_rentals
-    gold_investment_comparison:  investment_comparison
+    gold_investment_comparison:  gold_investment_comparison
     occupancy_rate: 0.50  # Assumed Airbnb occupancy rate (50%)
     days_per_year: 365
     months_per_year: 12

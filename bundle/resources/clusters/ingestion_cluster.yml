@@ -11,5 +11,3 @@ resources:
       policy_id: "001D3B0C8FBDAF19" # Personal Compute
       data_security_mode: "SINGLE_USER"
       single_user_name: "0dc52a6b-ba4a-4036-b5a9-966691106390"
-
-

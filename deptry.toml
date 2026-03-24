@@ -1,0 +1,5 @@
+[tool.deptry]
+requirements_txt = "requirements.txt"
+
+[tool.deptry.ignore]
+modules = ["pytest", "ipython", "pandas", "pre_commit", "ruff", "deptry", "uv"]

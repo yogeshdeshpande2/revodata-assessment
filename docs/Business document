@@ -1,0 +1,28 @@
+Pipeline Documentation: Purpose and Rationale
+
+Why This Pipeline needed?
+
+Enable Reliable Data Analytics:
+The pipeline is designed to transform raw data sources into structured, high-quality datasets. This enables robust analytics, reporting, and data-driven decision-making for the business.
+
+Support Scalable Data Engineering:
+By implementing the medallion architecture (Raw → Bronze → Silver → Gold), the pipeline ensures data is incrementally refined, improving quality at each stage.
+
+Automate and Standardize Data Operations:
+Automated orchestration (via Azure Data Factory and Databricks) reduces manual intervention, minimizes errors, and ensures consistent, repeatable data processing across environments.
+
+Facilitate Compliance and Governance:
+Centralized configuration and infrastructure-as-code practices ensure that deployments are auditable, secure, and compliant with organizational standards.
+
+Accelerate Business Insights:
+The gold layer delivers curated, business-focused datasets, enabling faster and more accurate reporting, analytics using such as Power BI dashboard for leadership.
+
+Business Value
+Faster Time-to-Market:
+Streamlined data flows and automated deployments.
+
+Data Quality:
+Each layer of the medallion architecture adds value—raw data is preserved, bronze provides structure, silver ensures quality, and gold delivers actionable insights.
+
+Operational Efficiency:
+Automated CI/CD and modular design reduce operational overhead and support rapid iteration. The code is organized with maximum reusability and easy to extend additinal features in future.

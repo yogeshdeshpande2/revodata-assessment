@@ -1,17 +1,13 @@
 import pytest
 from pyspark.sql import SparkSession
-
-# import sys
-# from pathlib import Path
-# sys.path.append(str(Path(__file__).parent.parent))
-
+import yaml
 from bundle.src.raw_bronze import RawToBronze
+
 
 @pytest.fixture(scope="module")
 def spark():
     return SparkSession.builder.master("local[1]").appName("pytest").getOrCreate()
 
-import yaml
 
 def test_raw_to_bronze_init(spark, tmp_path):
     config = {
@@ -28,7 +24,7 @@ def test_raw_to_bronze_init(spark, tmp_path):
                 "bronze_airbnb_table": "bronze_airbnb",
                 "bronze_rentals_table": "bronze_rentals",
                 "bronze_postcode_table": "bronze_postcode",
-                "bronze_adls_path": "/tmp/bronze"
+                "bronze_adls_path": "/tmp/bronze",
             }
         }
     }

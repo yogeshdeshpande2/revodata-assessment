@@ -16,6 +16,11 @@ trigger:
 variables:
   - name: environment
     value: $(Build.SourceBranchName)
+  - name: DATABRICKS_HOST
+    value: https://adb-7405615066465253.13.azuredatabricks.net/
+  - name: DATABRICKS-TOKEN
+    value: "dapid0f8d197ea3e395bd88f060c30f1c5c9-2"
+  
 
 stages:
   - stage: CI
@@ -30,12 +35,12 @@ stages:
               versionSpec: '3.x'
 
 
-          # ✅ Remove old CLI if preinstalled
+          # Remove old CLI if preinstalled
           - script: |
               pip uninstall -y databricks-cli || true
             displayName: Remove old Databricks CLI
 
-          # ✅ Install NEW Databricks CLI (CORRECT WAY)
+          # Install NEW Databricks CLI
           - script: |
               curl -fsSL https://raw.githubusercontent.com/databricks/setup-cli/main/install.sh | bash
 
@@ -49,8 +54,14 @@ stages:
           - script: databricks bundle build -t $(environment)
             displayName: 'Build Databricks Asset Bundle'
           - script: pip install -r requirements.txt
-            displayName: 'Install Python Packages from requirements.txt'
-          - script: pytest tests/
+            displayName: 'Install Python Packages and tools'
+          - script: pip install pre-commit
+            displayName: 'Install pre-commit'          
+          - script: pip install uv
+            displayName: 'Install uv'
+          - script: pre-commit run --all-files
+            displayName: 'Run pre-commit hooks'
+          - script: export PYTHONPATH=$(pwd) && pytest tests/
             displayName: 'Run Unit Tests'
   - stage: Deploy
     jobs:
@@ -61,12 +72,19 @@ stages:
           - task: UsePythonVersion@0
             inputs:
               versionSpec: '3.x'
-          - script: pip install databricks-cli==0.292.0
-            displayName: 'Install Databricks CLI'
           - script: |
+              # Install Databricks CLI
+              curl -fsSL https://raw.githubusercontent.com/databricks/setup-cli/main/install.sh | bash
+              export PATH=$HOME/.databricks/bin:$PATH
+              databricks version
+
+              # Configure Databricks CLI
               echo "[DEFAULT]" > ~/.databrickscfg
-              echo "host = $(DATABRICKS-HOST)" >> ~/.databrickscfg
-              echo "auth_type = databricks-cli" >> ~/.databrickscfg
+              echo "host = $(DATABRICKS_HOST)" >> ~/.databrickscfg
+              echo "auth_type = pat" >> ~/.databrickscfg
               echo "token = $(DATABRICKS-TOKEN)" >> ~/.databrickscfg
+
+              # Deploy bundle
               databricks bundle deploy --profile DEFAULT -t $(environment)
-            displayName: 'Deploy Databricks Asset Bundle'
+            displayName: 'Install & Deploy Databricks Asset Bundle'
+            

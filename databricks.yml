@@ -12,13 +12,6 @@ include:
   - bundle/resources/**/*.yml
   - bundle/resources/**/**/*.yml
 
-# sync:
-#   include:
-#     - dist
-#   exclude:
-#     - .azuredevops
-#     - docs
-
 variables:
   catalog:
     description: "Name of the catalog to use in Databricks"
@@ -44,19 +37,13 @@ variables:
   service_principal_name:
     description: "Service principal name for job run_as (leave blank to use caller)"
     default: "0dc52a6b-ba4a-4036-b5a9-966691106390"
-  # cluster_id:
-  #   description: "ID of the Databricks cluster"
-  #   default: ""  # supply via CLI or override in target if needed
-  # jobs_run_as:
-  #   description: "Service principal application ID"
-  #   default: "7b0d0219-0888-415e-9ec3-1be990ca4677"
 
 presets:
   tags:
     type: dab-revodata-assignment
 
 targets:
-  dev:
+  develop:
     mode: production
     workspace:
       host: https://adb-7405615066465253.13.azuredatabricks.net/
@@ -71,7 +58,6 @@ targets:
       environment: "t"
       bronze_adls_path: "abfss://con-bronze@sarevodata.dfs.core.windows.net/"
       silver_adls_path: "abfss://con-silver@sarevodata.dfs.core.windows.net/"
-      gold_adls_path: "abfss://con-gold@sarevodata.dfs.core.windows.net/"      
-      # cluster_id: "0404-153054-lyq8z"  # example cluster ID for dev; override as needed 
+      gold_adls_path: "abfss://con-gold@sarevodata.dfs.core.windows.net/"            
     run_as:
       service_principal_name: "0dc52a6b-ba4a-4036-b5a9-966691106390"
