@@ -19,7 +19,7 @@ variables:
   - name: DATABRICKS_HOST
     value: https://adb-7405615066465253.13.azuredatabricks.net/
   - name: DATABRICKS-TOKEN
-    value: "dapid0f8d197ea3e395bd88f060c30f1c5c9-2"
+    value: "<REMOVED_ToBeAdded>"
   
 
 stages:
