@@ -1,5 +1,0 @@
-[tool.deptry]
-requirements_txt = "../../requirements.txt"
-
-[tool.deptry.ignore]
-codes = ["DEP003"]
